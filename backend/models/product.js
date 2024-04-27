@@ -41,26 +41,6 @@ Category.hasMany(Product, {
   as: 'products',
 });
 
-const Recipe = require('./recipe');
-Product.hasMany(Recipe, {
-  foreignKey: 'productId',
-  as: 'recipes',
-});
-Recipe.belongsTo(Product, {
-  foreignKey: 'productId',
-  as: 'product',
-});
-
-const OrderItem = require('./orderItem');
-Product.hasMany(OrderItem, {
-  foreignKey: 'productId',
-  as: 'orderItems',
-});
-OrderItem.belongsTo(Product, {
-  foreignKey: 'productId',
-  as: 'product',
-});
-
 const Promotion = require('./promotion');
 Product.belongsToMany(Promotion, {
   through: 'PromotionProduct',
@@ -70,3 +50,9 @@ Product.belongsToMany(Promotion, {
 });
 Promotion.belongsToMany(Product, {
   through: 'PromotionProduct',
+  foreignKey: 'promotionId',
+  otherKey: 'productId',
+  as: 'products',
+});
+
+module.exports = Product;

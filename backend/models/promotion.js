@@ -21,4 +21,30 @@ const Promotion = sequelize.define('Promotion', {
   startDate: {
     type: DataTypes.DATEONLY,
     allowNull: true,
-    field: 'sta
+    field: 'start_date',
+  },
+  endDate: {
+    type: DataTypes.DATEONLY,
+    allowNull: true,
+    field: 'end_date',
+  },
+}, {
+  tableName: 'promotions',
+  timestamps: false,
+});
+
+const Product = require('./product');
+Promotion.belongsToMany(Product, {
+  through: 'PromotionProduct',
+  foreignKey: 'promotionId',
+  otherKey: 'productId',
+  as: 'products',
+});
+Product.belongsToMany(Promotion, {
+  through: 'PromotionProduct',
+  foreignKey: 'productId',
+  otherKey: 'promotionId',
+  as: 'promotions',
+});
+
+module.exports = Promotion;
