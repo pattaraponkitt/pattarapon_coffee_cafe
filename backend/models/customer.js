@@ -67,4 +67,4 @@ MembershipLevel.belongsToMany(Customer, {
   as: 'customers',
 });
 
-module.exports = Customer;ห
+module.exports = Customer;
